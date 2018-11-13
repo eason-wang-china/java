@@ -1,0 +1,3 @@
+通過注解的方式配置類：
+1、每個Bean裏面都有@Service
+2、配置文件需要配置@ComponentScan
