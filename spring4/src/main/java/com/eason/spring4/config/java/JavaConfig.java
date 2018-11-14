@@ -1,4 +1,4 @@
-package com.eason.spring4.javaconfig;
+package com.eason.spring4.config.java;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-// @ComponentScan("com.eason.spring4.javaconfig")
 public class JavaConfig {
 
 	// 方法名 和 返回值 不能和下面的完全一样，否则只能执行其中的一个

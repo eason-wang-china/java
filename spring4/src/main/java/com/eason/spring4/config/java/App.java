@@ -1,4 +1,4 @@
-package com.eason.spring4.javaconfig;
+package com.eason.spring4.config.java;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

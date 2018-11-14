@@ -1,4 +1,4 @@
-package com.eason.spring4.annotation;
+package com.eason.spring4.config.annotation;
 
 import org.springframework.stereotype.Service;
 
