@@ -26,7 +26,8 @@ public class JavaConfig {
 		return useFunctionService;
 	}
 
-	@Bean
+//	@Bean(initMethod="init", destroyMethod="destroy") // 可以一部分用注解方式，一部分用配置形式
+	@Bean(destroyMethod="destroy")
 //	@Scope("singleton")
 	@Scope("prototype") // 每次都会被执行
 	public FunctionService functionService() {
