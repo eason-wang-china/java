@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.eason</groupId>
@@ -9,28 +10,87 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.3.20.RELEASE</spring.version>
+		<aspectj.version>1.8.13</aspectj.version>
 	</properties>
 
 	<dependencies>
 
-		<!-- javaee-web-api -->
+<!-- Spring 核心框架 -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId><!-- spring 事务 -->
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId><!-- spring 对 jdbc 的数据访问支持 -->
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId><!-- spring 对 test 的支持 -->
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId><!-- aop -->
+			<version>${aspectj.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId><!-- aop -->
+			<version>${aspectj.version}</version>
+		</dependency>
+		
+<!-- 数据访问框架 -->
+
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId><!-- mybatis-spring 两者整合的中间件 -->
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId><!-- mysql 驱动 -->
+			<version>5.1.47</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId><!-- 数据源 c3p0 -->
+			<version>0.9.5.2</version>
+		</dependency>
+
+<!-- Servlet 相关 -->
+
 		<dependency>
 			<groupId>javax</groupId>
-			<artifactId>javaee-web-api</artifactId>
+			<artifactId>javaee-web-api</artifactId><!-- javaee-web-api -->
 			<version>8.0</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
+			<artifactId>javax.servlet-api</artifactId><!-- servlet-api -->
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- views -->
+<!-- 视图框架 -->
+
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -42,26 +102,50 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-
-		<!-- json + xml -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
+			<artifactId>jackson-dataformat-xml</artifactId><!-- json + xml -->
 			<version>2.9.3</version>
 		</dependency>
+		
+<!-- 数据访问框架 -->
 
-		<!-- spring -->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.version}</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId><!-- mybatis-spring 两者整合的中间件 -->
+			<version>1.3.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId><!-- mysql 驱动 -->
+			<version>5.1.47</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId><!-- 数据源 c3p0 -->
+			<version>0.9.5.2</version>
+		</dependency>
+		
+<!-- 辅助工具 -->
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId><!-- 通过注解消除臃肿的代码 -->
+			<version>1.16.20</version>
+			<scope>provided</scope>
 		</dependency>
 
-		<!-- test -->
+<!-- 测试框架 -->
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

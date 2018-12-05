@@ -35,6 +35,10 @@ pageContext.setAttribute("basePath", path);
 <li><a href="${ basePath }/model/to-jsp?name=eason-wang&id=33">使用ModelAttribute返回jsp页面</a></li>
 <li><a href="${ basePath }/model/no-model?name=eason-wang&id=33">参数中没有model</a></li>
 
+<li>--mvc config--</li>
+<li><a href="${ basePath }/index">请求直接映射为视图</a></li>
+<li><a href="${ basePath }/vue-logo.png">使用默认的 Servlet 处理静态资源</a></li>
+
 </ul>
 </body>
 </html>
