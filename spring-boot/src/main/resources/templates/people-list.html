@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"><!-- 命名空间，动态处理的元素前缀是 th -->
+<head>
+<meta content="text/html;charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link th:href="@{bootstrap/css/bootstrap.min.css}" rel="stylesheet" /><!-- @{} 引入静态资源，资源放在 static 目录下面 -->
+<link th:href="@{bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body style="margin: 15px 20px;">
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">访问 Model 中的属性</h3>
+		</div>
+		<div class="panel-body">
+			<div><span th:text="${singlePerson.name}">人员姓名（这部分文字会被替换掉）</span></div>
+			<div>在元素标签中增加 th:text="${singlePerson.name}" 属性，来获取上下文环境中的属性信息</div>
+			
+			<div th:object="${singlePerson}">
+				<span th:text="*{name}"/> -- <span th:text="*{age}"/>
+			</div>
+			<div>th:object="${singlePerson}" 指定对象，th:text="*{name}" 在这个对象上获取对应属性信息</div>
+		</div>
+	</div>
+
+	<div th:if="${not #lists.isEmpty(people)}">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h3 class="panel-title">列表</h3></div>
+			<div class="panel-body">
+				<ul class="list-group">
+					<li class="list-group-item" th:each="person, state:${people}">
+						<span th:text="${state.index}"/> -- 
+						<span th:text="${person.name}"/> -- 
+						<span th:text="${person.age}"/> -- 
+						<button class="btn" th:onclick="javascript:getName([[${person.name}]]);">获得名字</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<script th:src="@{jquery-1.10.2.min.js}" type="text/javascript"></script>
+	<script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
+	<script th:inline="javascript">
+		var single = [[${singlePerson}]];
+	  	console.log(single.name+"/"+single.age)
+	  	
+	  	function getName(name){
+	  		//console.log(name);
+	  		alert("选择的名字是：" + name);
+	  	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+<configuration xmlns="http://ch.qos.logback/xml/ns/logback"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://ch.qos.logback/xml/ns/logback 
+               https://raw.githubusercontent.com/enricopulatzo/logback-XSD/master/src/main/xsd/logback.xsd" 
+               debug="false" scanPeriod="30 seconds"> -->
+<configuration debug="false" scanPeriod="30 seconds">
+
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+  	<include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+	
+	
+	<!-- 变量 ${catalina.home} 是 tomcat 的根目录 -->
+	<property name="USER_HOME" value="${catalina.home}/logback/logs" />
+	<!-- <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}spring.log}"/> -->
+
+	<!-- 控制台日志输出器 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+		<!-- 过滤掉某个级别以下的日志不，不用一定要注释掉，否则级别设置太高容易看不到日志 -->
+		<!-- 
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>ERROR</level>
+		</filter>
+		 -->
+	</appender>
+
+	<!-- 文件日志输出器 -->
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>${USER_HOME}/myApp.log</file>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} -- %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 最基础的日志记录器 -->
+	<root level="info">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+	
+	<logger level="debug" name="org.hibernate.SQL" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<logger level="TRACE" name="org.hibernate.type.descriptor.sql.BasicBinder" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	
+	<!-- 配置 开发（dev）、测试（test）、生产（prod）三套环境 -->
+	<springProfile name="dev">
+	    <root level="INFO">
+	      <appender-ref ref="CONSOLE" />
+	      <appender-ref ref="FILE" />
+	    </root>
+	 </springProfile>
+	 <springProfile name="test,prod">
+	    <root level="INFO">
+	      <appender-ref ref="FILE" />
+	    </root>
+	 </springProfile>
+	
+	<!-- 想看所有 mapper 产生的 sql 相关的日志，这个 name 属性值对应 xxMapper.xml 文件中的 namespace，因为所有 namespace 均以 mapper 为前缀 , additivity="false" 不希望上级的 logger 输出-->
+	<!-- 
+	<logger name="com.eason.mapper" level="debug" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	 -->
+	 <!-- 
+	<logger name="com.eason.dao" level="debug" additivity="false">
+		<appender-ref ref="CONSOLE" />
+	</logger>
+	 -->
+</configuration>
