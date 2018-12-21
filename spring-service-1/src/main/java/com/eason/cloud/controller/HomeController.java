@@ -1,6 +1,7 @@
 package com.eason.cloud.controller;
 
 import java.util.List;
+import java.util.Map.Entry;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -17,6 +18,8 @@ public class HomeController {
 	@RequestMapping("/")
 	public String index() {
 
+		long start = System.currentTimeMillis();
+		
 		//System.out.println(client.getLocalServiceInstance().getServiceId());
 		
 		List<ServiceInstance> list = client.getInstances("spring-cloud-service-1");
@@ -35,15 +38,19 @@ public class HomeController {
 
 			List<ServiceInstance> serviceInstances = client.getInstances(s);
 			for (ServiceInstance si : serviceInstances) {
-
+				System.out.println("    services:" + s + ":getInstanceId()=" + si.getInstanceId());
 				System.out.println("    services:" + s + ":getHost()=" + si.getHost());
 				System.out.println("    services:" + s + ":getPort()=" + si.getPort());
 				System.out.println("    services:" + s + ":getServiceId()=" + si.getServiceId());
 				System.out.println("    services:" + s + ":getUri()=" + si.getUri());
 				System.out.println("    services:" + s + ":getMetadata()=" + si.getMetadata());
+				
+				for (Entry<String, String> map : si.getMetadata().entrySet()) {
+					System.out.println("    	metadata:" + s + ":key=" + map.getKey() + ":value=" + map.getValue());
+				}
 			}
 		}
 
-		return "hello eason!";
+		return "{ result: hello world!   use: " + (System.currentTimeMillis() - start) + " }";
 	}
 }
